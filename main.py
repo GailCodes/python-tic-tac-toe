@@ -1,3 +1,5 @@
+from termcolor import colored
+
 board = [
     0, 0, 0,
     0, 0, 0,
@@ -30,9 +32,9 @@ def main():
 def showBoard(board):
     for i in range(0, len(board)):
         if board[i] == 1:
-            print(f"| X ", end="")
+            print(f"| {colored('X', 'light_blue')} ", end="")
         elif board[i] == 2:
-            print(f"| O ", end="")
+            print(f"| {colored('O', 'green')} ", end="")
         else:
             print(f"| {i + 1} ", end="")
 
