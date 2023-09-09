@@ -4,20 +4,37 @@ board = [
     0, 0, 0
 ]
 
+winningPositions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 4, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+]
+
 gameRunning = True
 
 
 def main():
+    currentPlayer = 1
     while gameRunning:
-        currentPlayer = 1
         showBoard(board)
-        updateBoard(getPlayerMove(board), currentPlayer, board)
+        updateBoard(getPlayerMove(board, currentPlayer), currentPlayer, board)
+        checkForWin(board, winningPositions, currentPlayer)
         currentPlayer = changeCurrentPlayer(currentPlayer)
 
 
 def showBoard(board):
     for i in range(0, len(board)):
-        print(f"| {board[i]} ", end="")
+        if board[i] == 1:
+            print(f"| X ", end="")
+        elif board[i] == 2:
+            print(f"| O ", end="")
+        else:
+            print(f"| {i + 1} ", end="")
 
         if ((i + 1) % 3 == 0):
             print("|")
@@ -30,10 +47,11 @@ def changeCurrentPlayer(currentPlayer):
         return 1
 
 
-def getPlayerMove(board):
+def getPlayerMove(board, currentPlayer):
     move = 0
     while not isValidPlayerMove(move, board):
-        move = input("Input a number between [1 and 9]")
+        print(f"Player {currentPlayer}'s turn")
+        move = input("Input a number between [1 and 9] ")
 
     return int(move)
 
@@ -57,6 +75,16 @@ def isValidPlayerMove(move, board):
 
 def updateBoard(moveIndex, currentPlayer, board):
     board[toBoardIndex(moveIndex)] = currentPlayer
+
+
+def checkForWin(board, winningPositions, currentPlayer):
+    global gameRunning
+
+    for positions in winningPositions:
+        if board[positions[0]] and board[positions[1]] and board[positions[2]] == currentPlayer:
+            print(f"Player {currentPlayer} wins!")
+            gameRunning = False
+            return
 
 
 def toBoardIndex(number):
