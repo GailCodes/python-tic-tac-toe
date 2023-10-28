@@ -1,4 +1,5 @@
 from termcolor import colored
+from random import randrange
 
 board = [
     0, 0, 0,
@@ -28,6 +29,8 @@ def main():
         checkForWin(board, winningPositions, currentPlayer)
         currentPlayer = changeCurrentPlayer(currentPlayer)
 
+    showBoard(board)
+
 
 def showBoard(board):
     for i in range(0, len(board)):
@@ -50,10 +53,14 @@ def changeCurrentPlayer(currentPlayer):
 
 
 def getPlayerMove(board, currentPlayer):
+    print(f"Player {currentPlayer}'s turn")
+
     move = 0
     while not isValidPlayerMove(move, board):
-        print(f"Player {currentPlayer}'s turn")
-        move = input("Input a number between [1 and 9] ")
+        if currentPlayer == 1:
+            move = input("Input a number between [1 and 9] ")
+        else:
+            move = randrange(1, 10) # Get AI move
 
     return int(move)
 
@@ -83,7 +90,7 @@ def checkForWin(board, winningPositions, currentPlayer):
     global gameRunning
 
     for positions in winningPositions:
-        if board[positions[0]] and board[positions[1]] and board[positions[2]] == currentPlayer:
+        if board[positions[0]] == currentPlayer and board[positions[1]] == currentPlayer and board[positions[2]] == currentPlayer:
             print(f"Player {currentPlayer} wins!")
             gameRunning = False
             return
