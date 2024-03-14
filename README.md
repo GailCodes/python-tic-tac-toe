@@ -7,7 +7,7 @@ Just a fun tic-tac-toe game made with Python
 
 ### How to play
 
-Make the *run* script executable
+Make the **run** script executable
 
 ```
 chmod +x run
