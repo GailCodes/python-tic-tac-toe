@@ -1,5 +1,7 @@
 from termcolor import colored
 from random import randrange
+from time import sleep
+from os import system, name as osName
 
 board = [
     0, 0, 0,
@@ -33,6 +35,8 @@ def main():
 
 
 def showBoard(board):
+    sleep(1)
+    clearScreen()
     for i in range(0, len(board)):
         if board[i] == 1:
             print(f"| {colored('X', 'light_blue')} ", end="")
@@ -98,6 +102,10 @@ def checkForWin(board, winningPositions, currentPlayer):
 
 def toBoardIndex(number):
     return number - 1
+
+
+def clearScreen():
+    system("cls" if osName == "nt" else "clear")
 
 
 main()
