@@ -3,11 +3,7 @@ from random import randrange
 from time import sleep
 from os import system, name as osName
 
-board = [
-    0, 0, 0,
-    0, 0, 0,
-    0, 0, 0
-]
+board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 winningPositions = [
     [0, 1, 2],
@@ -17,7 +13,7 @@ winningPositions = [
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [2, 4, 6]
+    [2, 4, 6],
 ]
 
 gameRunning = True
@@ -45,12 +41,12 @@ def showBoard(board):
         else:
             print(f"| {i + 1} ", end="")
 
-        if ((i + 1) % 3 == 0):
+        if (i + 1) % 3 == 0:
             print("|")
 
 
 def changeCurrentPlayer(currentPlayer):
-    if (currentPlayer == 1):
+    if currentPlayer == 1:
         return 2
     else:
         return 1
@@ -64,7 +60,7 @@ def getPlayerMove(board, currentPlayer):
         if currentPlayer == 1:
             move = input("Input a number between [1 and 9] ")
         else:
-            move = randrange(1, 10) # Get AI move
+            move = randrange(1, 10)  # Get AI move
 
     return int(move)
 
@@ -94,7 +90,11 @@ def checkForWin(board, winningPositions, currentPlayer):
     global gameRunning
 
     for positions in winningPositions:
-        if board[positions[0]] == currentPlayer and board[positions[1]] == currentPlayer and board[positions[2]] == currentPlayer:
+        if (
+            board[positions[0]] == currentPlayer
+            and board[positions[1]] == currentPlayer
+            and board[positions[2]] == currentPlayer
+        ):
             print(f"Player {currentPlayer} wins!")
             gameRunning = False
             return
