@@ -7,6 +7,11 @@ Just a fun tic-tac-toe game made with Python
 
 ### How to play
 
+Dependencies:
+- python3
+- python3-venv
+- pip3
+
 Make the **run** script executable
 
 ```
