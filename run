@@ -2,13 +2,13 @@
 
 # Check if python is installed
 if ! command -v python3 &> /dev/null; then
-    echo "Python3 is not installed. Installing..."
+    echo "Python3 is not installed."
     exit 1
 fi
 
 # Check if pip is installed
 if ! command -v pip3 &> /dev/null; then
-    echo "pip3 is not installed. Installing..."
+    echo "pip3 is not installed."
     exit 1
 fi
 
