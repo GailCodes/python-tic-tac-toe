@@ -28,7 +28,7 @@ pip install -r requirements.txt
 
 # Run main.py
 echo "Executing main.py..."
-python main.py
+python3 main.py
 
 # Deactivate the virtual environment
 echo "Deactivating Python virtual environment..."
