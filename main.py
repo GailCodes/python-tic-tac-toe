@@ -3,6 +3,9 @@ from random import randrange
 from time import sleep
 from os import system, name as osName
 
+GAME_RUNNING = True
+GAME_ENDING_MESSAGE = ""
+
 board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 winningPositions = [
@@ -16,18 +19,17 @@ winningPositions = [
     [2, 4, 6],
 ]
 
-gameRunning = True
-
 
 def main():
     currentPlayer = 1
-    while gameRunning:
+    while GAME_RUNNING:
         showBoard(board)
         updateBoard(getPlayerMove(board, currentPlayer), currentPlayer, board)
         checkForWin(board, winningPositions, currentPlayer)
         currentPlayer = changeCurrentPlayer(currentPlayer)
 
     showBoard(board)
+    print(GAME_ENDING_MESSAGE)
 
 
 def showBoard(board):
@@ -87,7 +89,7 @@ def updateBoard(moveIndex, currentPlayer, board):
 
 
 def checkForWin(board, winningPositions, currentPlayer):
-    global gameRunning
+    global GAME_ENDING_MESSAGE
 
     for positions in winningPositions:
         if (
@@ -95,9 +97,11 @@ def checkForWin(board, winningPositions, currentPlayer):
             and board[positions[1]] == currentPlayer
             and board[positions[2]] == currentPlayer
         ):
-            print(f"Player {currentPlayer} wins!")
-            gameRunning = False
-            return
+            GAME_ENDING_MESSAGE = (f"Player {currentPlayer} wins!")
+            stopGame()
+        elif board.count(0) == 0:
+            GAME_ENDING_MESSAGE ="Game is a draw!"
+            stopGame()
 
 
 def toBoardIndex(number):
@@ -106,6 +110,13 @@ def toBoardIndex(number):
 
 def clearScreen():
     system("cls" if osName == "nt" else "clear")
+    
+    
+def stopGame():
+    global GAME_RUNNING
+    
+    GAME_RUNNING = False
+    return
 
 
 main()
