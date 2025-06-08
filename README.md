@@ -12,14 +12,14 @@ Dependencies:
 - python3-venv
 - pip3
 
-Make the **run** script executable
+Make the executable
 
 ```
-chmod +x run
+make executable
 ```
 
 Play the game
 
 ```
-./run
+./dist/python-tic-tac-toe/python-tic-tac-toe
 ```
